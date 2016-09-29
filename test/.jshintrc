@@ -1,9 +1,8 @@
 {
-    "node": true,
     "bitwise": true,
     "curly": true,
     "eqeqeq": true,
-    "esnext": true,
+    "es5": false,
     "expr": true,
     "forin": true,
     "funcscope": false,
@@ -11,10 +10,17 @@
     "iterator": false,
     "latedef": true,
     "noarg": true,
+    "node": true,
+    "mocha": true,
     "nomen": false,
+    "onevar": true,
+    "passfail": false,
     "nonew": true,
     "shadow": false,
+    "smarttabs": false,
     "strict": true,
+    "trailing": true,
     "undef": true,
-    "unused": true
+    "unused": true,
+    "white": false
 }

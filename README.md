@@ -1,6 +1,10 @@
-# GH Jira [![Build Status](https://secure.travis-ci.org/node-gh/gh-jira.png?branch=master)](https://travis-ci.org/node-gh/gh-jira) [![NPM version](https://badge.fury.io/js/gh-jira.png)](http://badge.fury.io/js/gh-jira) [![Dependency Status](https://david-dm.org/node-gh/gh-jira.png)](https://david-dm.org/node-gh/gh-jira)
+# GH Jira
 
-![Inspectocat](http://zno.io/RNPr/inspectocat.png)
+[![NPM version](http://img.shields.io/npm/v/gh-jira.svg?style=flat)](http://npmjs.org/gh-jira)
+[![NPM downloads](http://img.shields.io/npm/dm/gh-jira.svg?style=flat)](http://npmjs.org/gh-jira)
+[![Build Status](http://img.shields.io/travis/node-gh/gh-jira/master.svg?style=flat)](https://travis-ci.org/node-gh/gh-jira)
+[![Dependencies Status](http://img.shields.io/david/node-gh/gh-jira.svg?style=flat)](https://david-dm.org/node-gh/gh-jira)
+[![DevDependencies Status](http://img.shields.io/david/dev/node-gh/gh-jira.svg?style=flat)](https://david-dm.org/node-gh/gh-jira#info=devDependencies)
 
 NodeGH plugin for integrating [Jira](https://www.atlassian.com/software/jira), an issue management system.
 
@@ -9,7 +13,7 @@ NodeGH plugin for integrating [Jira](https://www.atlassian.com/software/jira), a
 ## Install
 
 ```
-[sudo] npm install -g gh-jira
+[sudo] npm install -g gh gh-jira
 ```
 
 ## Usage
@@ -40,19 +44,25 @@ Option             | Usage        | Type
 * Create a new issue on a certain project.
 
     ```
-gh jira --new --title 'Node GH rocks!' --message 'Body with **Markdown** support' --project LPS
+gh jira --new --project LPS --title 'Node GH rocks!' --message 'Body with **Markdown** support'
     ```
 
 * Create a new issue specifying the component.
 
     ```
-gh jira --new --title 'Node GH rocks!' --component UI
+gh jira --new --project LPS --title 'Node GH rocks!' --component UI
     ```
+
+* Create a new, unassigned, issue.
+    ```
+gh jira --new --project LPS --title 'Node GH rocks!' --unassigned
+    ```
+
 
 * Create a new issue and assign it to someone.
 
     ```
-gh jira --new --title 'Node GH rocks!' --assignee eduardolundgren
+gh jira --new --project LPS --title 'Node GH rocks!' --assignee eduardolundgren
     ```
 
 ### 2. Comment
@@ -120,6 +130,12 @@ gh jira LPS-123 --transition
 
     ```
 gh jira LPS-123 --assignee brianchandotcom --transition
+    ```
+
+* Show valid transitions for the issue and unassign it.
+
+    ```
+gh jira LPS-123 --unassign --transition
     ```
 
 ## Testing

@@ -1,44 +1,35 @@
 {
-    "api_version": "2",
-    "default_issue_component": {
-        "LPS": "UI"
-    },
-    "default_issue_type": {
-        "LPS": "Bug"
-    },
-    "default_issue_version": {
-        "LPS": "6.2.X"
-    },
+    "base": "rest/api/2",
     "hooks": {
         "pull-request": {
             "close": {
                 "before": [],
                 "after": [
-                    { "cmd": "gh", "args": ["jira", "{{jira.number.previous}}"] }
+                    "gh jira {{jira.number.previous}}"
                 ]
             },
             "fetch": {
                 "before": [],
                 "after": [
-                    "{{#if jira.number.current}} gh jira {{jira.number.current}} --comment 'Just started reviewing :)' {{/if}}"
+                    "{{#if jira.number.current}} gh jira {{jira.number.current}}  --comment 'Just started reviewing [{{options.user}}/{{options.repo}}#{{options.number}}|https://github.com/{{options.user}}/{{options.repo}}/pull/{{options.number}}].' {{/if}}"
                 ]
             },
             "fwd": {
                 "before": [],
                 "after": [
-                    { "cmd": "gh", "args": ["jira", "{{jira.number.current}}", "--assignee", "{{options.fwd}}", "--submittedLink", "{{forwardedLink}}"] }
+                    "gh jira {{jira.number.current}} --assignee {{options.fwd}} --submittedLink {{forwardedLink}} --transition"
                 ]
             },
             "merge": {
                 "before": [],
                 "after": [
-                    { "cmd": "gh", "args": ["jira", "{{jira.number.previous}}"] }
+                    "gh jira {{jira.number.previous}}"
                 ]
             },
             "submit": {
                 "before": [],
                 "after": [
-                    { "cmd": "gh", "args": ["jira", "{{jira.number.previous}}", "--assignee", "{{options.submit}}", "--submittedLink", "{{submittedLink}}"] }
+                    "gh jira {{jira.number.previous}} --assignee {{options.submit}} --submittedLink {{submittedLink}} --transition"
                 ]
             }
         }
@@ -52,6 +43,12 @@
             "Fix Version/s": true
         },
         "Code Review Request": {
+            "Assignee": {
+                "name": "{{options.assignee}}"
+            },
+            "Git Pull Request": "{{options.submittedLink}}"
+        },
+        "Create Review Request": {
             "Assignee": {
                 "name": "{{options.assignee}}"
             },
